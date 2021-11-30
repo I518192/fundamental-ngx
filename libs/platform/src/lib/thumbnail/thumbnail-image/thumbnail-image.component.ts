@@ -13,10 +13,11 @@ import {
     ElementRef
 } from '@angular/core';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
 import { ThumbnailDetailsComponent } from '../thumbnail-details/thumbnail-details.component';
+import { SPACE } from '@angular/cdk/keycodes';
 
 @Component({
     selector: 'fdp-thumbnail-image',
@@ -61,7 +62,6 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     /** @hidden */
     ngOnInit(): void {
         this._setOverlay();
-        console.log('length', this.thumbnailImages.length);
     }
 
     /** @hidden */
@@ -95,7 +95,10 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     }
 
     /** @hidden */
-    thumbnailClick(selectedMedia: Media): void {
+    thumbnailClick(event: KeyboardEvent, selectedMedia: Media): void {
+        if (KeyUtil.isKeyCode(event, SPACE)) {
+            event?.preventDefault();
+        }
         this.mediaList.forEach((item) => (item.selected = false));
         selectedMedia.selected = true;
         this.thumbnailClicked.emit(selectedMedia);
