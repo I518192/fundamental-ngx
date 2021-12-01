@@ -7,6 +7,7 @@
         [class.fdp-thumbnail-image--overlay]="image.overlayRequired"
         (click)="image.overlayRequired ? openDialog(image, mediaList) : thumbnailClick($event, image)"
         (keydown.space)="image.overlayRequired ? openDialog(image, mediaList) : thumbnailClick($event, image)"
+        tabindex="0"
         role="option"
         [attr.aria-roledescription]="roleDescription"
         [attr.aria-selected]="image.selected"
