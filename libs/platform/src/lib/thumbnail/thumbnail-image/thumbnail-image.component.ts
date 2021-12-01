@@ -89,14 +89,13 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
                 mediaList: mediaList,
                 rtl: this._isRtl(),
                 maxImages: this.maxImages
-            },
-            ariaLabelledBy: this.thumbnailId
+            }
         });
     }
 
     /** @hidden */
-    thumbnailClick(event: KeyboardEvent, selectedMedia: Media): void {
-        if (KeyUtil.isKeyCode(event, SPACE)) {
+    thumbnailClick(selectedMedia: Media, event?: KeyboardEvent): void {
+        if (event instanceof KeyboardEvent && KeyUtil.isKeyCode(event, SPACE)) {
             event?.preventDefault();
         }
         this.mediaList.forEach((item) => (item.selected = false));
