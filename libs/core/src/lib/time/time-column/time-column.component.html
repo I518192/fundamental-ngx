@@ -9,13 +9,10 @@
     (keyup)="spinnerButtonKeyupHandle($event, true)"
     (click)="scrollUp($event)"
 ></button>
-<div
-    class="fd-time__wrapper"
-    [ngClass]="{ 'fd-time__wrapper--active': active, 'fd-time__wrapper--meridian': meridian }"
->
+<div class="fd-time__wrapper" [class.fd-time__wrapper--active]="active" [class.fd-time__wrapper--meridian]="meridian">
     <ul
         class="fd-time__list"
-        [ngClass]="{ 'fd-time-column-custom-hidden': !active }"
+        [class.fd-time-column-custom-hidden]="!active"
         [config]="config"
         (click)="indicator.focus()"
         (activeChange)="activeChangedHandle($event)"
@@ -39,10 +36,10 @@
         class="fd-time__current-indicator"
         #indicator
         tabindex="-1"
-        [ngClass]="{ 'fd-time-column-custom-hidden': !active }"
+        [class.fd-time-column-custom-hidden]="!active"
         [id]="currentIndicatorId"
     ></div>
-    <span class="fd-time__item fd-time__item--collapsed" [ngClass]="{ 'fd-time-column-custom-hidden': active }">
+    <span class="fd-time__item fd-time__item--collapsed" [class.fd-time-column-custom-hidden]="active">
         {{ activeValue?.label }}
     </span>
 </div>
