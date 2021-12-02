@@ -90,7 +90,8 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
                 rtl: this._isRtl(),
                 maxImages: this.maxImages
             },
-            ariaLabelledBy: this.thumbnailId
+            ariaLabelledBy: this.thumbnailId,
+            focusTrapped: true
         });
     }
 
