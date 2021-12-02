@@ -486,7 +486,7 @@
         },
         "core-time-picker": {
             "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-time", "core-popover"]
+            "implicitDependencies": ["core-shared", "core-utils", "core-time", "core-popover"]
         },
         "core-timeline": {
             "tags": ["fd"],
