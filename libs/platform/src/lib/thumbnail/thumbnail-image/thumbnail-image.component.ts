@@ -89,12 +89,13 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
                 mediaList: mediaList,
                 rtl: this._isRtl(),
                 maxImages: this.maxImages
-            }
+            },
+            ariaLabelledBy: this.thumbnailId
         });
     }
 
     /** @hidden */
-    thumbnailClick(selectedMedia: Media, event?: KeyboardEvent): void {
+    thumbnailClick(selectedMedia: Media, event?: KeyboardEvent | MouseEvent): void {
         if (event instanceof KeyboardEvent && KeyUtil.isKeyCode(event, SPACE)) {
             event?.preventDefault();
         }
@@ -112,5 +113,9 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         if (this.mediaList.length > this.maxImages) {
             this.mediaList[this.maxImages - 1].overlayRequired = true;
         }
+    }
+
+    openImage(image: Media, $event: KeyboardEvent | MouseEvent) {
+        image.overlayRequired ? this.openDialog(image, this.mediaList) : this.thumbnailClick(image, $event);
     }
 }
