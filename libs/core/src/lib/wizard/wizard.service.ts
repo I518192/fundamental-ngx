@@ -2,7 +2,7 @@ import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { Injectable, Optional, QueryList } from '@angular/core';
 import { WizardStepComponent } from '.';
 import { KeyUtil, RtlService } from '../utils';
-import { COMPLETED_STEP_STATUS } from './constants';
+import { COMPLETED_STEP_STATUS, CURRENT_STEP_STATUS } from './constants';
 
 @Injectable()
 export class WizardService {
@@ -11,9 +11,11 @@ export class WizardService {
     /** @hidden */
     progressBarKeyHandler(event: any, steps: QueryList<WizardStepComponent>, index: number): void {
         const rtlDirection: boolean = this._rtlService && this._rtlService.rtl.getValue();
-
         if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
-            if (steps.get(index - 1).status === COMPLETED_STEP_STATUS) {
+            if (
+                steps.get(index - 1).status === COMPLETED_STEP_STATUS ||
+                steps.get(index - 1).status === CURRENT_STEP_STATUS
+            ) {
                 if (!rtlDirection) {
                     this._focusPrevious(index, steps);
                 } else {

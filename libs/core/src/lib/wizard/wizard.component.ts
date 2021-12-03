@@ -24,7 +24,6 @@ import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progres
 import { WizardContentComponent } from './wizard-content/wizard-content.component';
 import { ACTIVE_STEP_STATUS, CURRENT_STEP_STATUS, UPCOMING_STEP_STATUS, COMPLETED_STEP_STATUS } from './constants';
 import { WIZARD } from './wizard-injection-token';
-import { CdkTrapFocus } from '@angular/cdk/a11y';
 
 export const STEP_MIN_WIDTH = 168;
 export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
