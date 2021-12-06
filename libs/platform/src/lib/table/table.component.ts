@@ -8,7 +8,6 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
-    Inject,
     Input,
     NgZone,
     OnChanges,
@@ -24,7 +23,6 @@ import {
     ViewEncapsulation,
     ViewRef
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
@@ -57,7 +55,6 @@ import { TableColumn } from './components/table-column/table-column';
 import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-toolbar/table-toolbar';
 import { Table } from './table';
 import { TableScrollable, TableScrollDispatcherService } from './table-scroll-dispatcher.service';
-import { getScrollBarWidth } from './utils';
 import {
     ColumnsChange,
     FilterChange,
@@ -125,7 +122,6 @@ let tableUniqueId = 0;
  * </fdp-table>
  * ```
  */
-/** @dynamic */
 @Component({
     selector: 'fdp-table',
     templateUrl: './table.component.html',
@@ -507,12 +503,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      */
     _visibleColumns: TableColumn[] = [];
 
-    /** @hidden */
-    _scrollBarWidth = 0;
-
     /**
      * @hidden
-     * Mappping function for the trackBy, provided by the user.
+     * Mapping function for the trackBy, provided by the user.
      * Is needed, because we are wrapping user supplied data into a `TableRow` class.
      */
     _rowTrackBy: TrackByFunction<TableRow<T>>;
@@ -590,7 +583,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         private readonly _tableScrollDispatcher: TableScrollDispatcherService,
         private readonly _tableColumnResizeService: TableColumnResizeService,
         private readonly _elRef: ElementRef,
-        @Inject(DOCUMENT) private readonly _document: Document | null,
         @Optional() private readonly _rtlService: RtlService,
         @Optional() private readonly _contentDensityService: ContentDensityService
     ) {
@@ -638,8 +630,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     ngOnInit(): void {
-        this._calculateScrollbarWidth();
-
         this._isGroupTable = this.initialGroupBy?.length > 0;
     }
 
@@ -1923,15 +1913,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         }
 
         return undefined;
-    }
-
-    /** @hidden */
-    private _calculateScrollbarWidth(): void {
-        if (!this._document) {
-            return;
-        }
-
-        this._scrollBarWidth = getScrollBarWidth(this._document);
     }
 
     /** @hidden */
