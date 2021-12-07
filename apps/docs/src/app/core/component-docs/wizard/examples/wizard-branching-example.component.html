@@ -10,7 +10,7 @@
             <!-- The Wizard -->
             <fd-wizard>
                 <fd-wizard-navigation>
-                    <ul fd-wizard-progress-bar size="xl" role="list" aria-label="Wizard Steps">
+                    <ul fd-wizard-progress-bar size="xl" aria-label="Wizard Steps">
                         <li
                             fd-wizard-step
                             [status]="step1status"
@@ -62,7 +62,6 @@
                                         name="radio-name-1"
                                         [(ngModel)]="paymentSelection"
                                         (ngModelChange)="paymentSelectionChanged(confirmationDialog)"
-                                        aria-labelledby="fd-payment-label-01"
                                         aria-label="Bank Transfer"
                                     >
                                         Bank Transfer
