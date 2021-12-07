@@ -6,7 +6,7 @@
         [class.fdp-thumbnail-image--selected]="image.selected"
         [class.fdp-thumbnail-image--overlay]="image.overlayRequired"
         (click)="openImage(image)"
-        (keydown)="openImage(image, $event)"
+        (keydown.space)="openImage(image, $event)"
         tabindex="0"
         role="option"
         [attr.aria-roledescription]="roleDescription"
